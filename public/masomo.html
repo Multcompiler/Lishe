@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Firebase realtime database CRUD example</title>
+      <link rel="stylesheet" href="assets/css/masomo.css">
+      <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css.map">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+      <div class='container'>
+        <div class='header'>
+          <img src="https://anadea.info/uploads/employee/avatar/53/sergey_voloshin.jpg" alt="">
+          <h1>Sergey Voloshin</h1>
+          <h4>Frontend Developer in Anadea Inc.</h4>
+        </div>
+        <h2>Reviews</h2>
+        <h4>CREATE/UPDATE</h4>
+        <form id='reviewForm'>
+          <input type="hidden" id='hiddenId' />
+          <input type="text" id='fullName' />
+          <br/>
+          <textarea id='message'></textarea>
+          <br/>
+          <button type='submit'>Add/Update rewiew</button>
+        </form>
+        <br/>
+        <h4>READ/DELETE</h4>
+        <ul class="list-group" id='reviews'></ul>
+        <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+          <div class="row">
+            <div class="col-sm-12">
+              <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                <thead>
+                  <tr role="row">
+                    <th width="8%" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Picture: activate to sort column descending" aria-sort="ascending">Picture</th>
+                    <th width="10%" class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Name: activate to sort column descending" aria-sort="ascending">Engineer name</th>
+                    <th width="12%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Address: activate to sort column ascending">Location</th>
+                    <th width="8%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending"> # of Team  </th>
+                    <th width="8%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Birthdate: activate to sort column ascending">Recorded date</th>
+                    <th width="8%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="HiredDate: activate to sort column ascending">Maintained Date</th>
+                    <th width="8%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Department: activate to sort column ascending">Department</th>
+                    <th width="8%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Division: activate to sort column ascending">Division</th>
+                    <th tabindex="0" aria-controls="example2" rowspan="1" colspan="2" aria-label="Action: activate to sort column ascending">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr role="row" class="odd">
+           
+                      <td class="sorting_1">firstname</td>
+                      <td class="hidden-xs">addres</td>
+                      <td class="hidden-xs">{{ $employee->age }}</td>
+                      <td class="hidden-xs">{{ $employee->birthdate }}</td>
+                      <td class="hidden-xs">{{ $employee->date_hired }}</td>
+                      <td class="hidden-xs">{{ $employee->department_name }}</td>
+                      <td class="hidden-xs">{{ $employee->division_name }}</td>
+                      <td>
+                        <form class="row" method="POST" action="{{ route('employee-management.destroy', ['id' => $employee->id]) }}" onsubmit = "return confirm('Are you sure?')">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <a class="btn btn-success col-sm-3 col-xs-5 btn-margin">
+                            Update
+                            </a>
+                             <button type="submit" class="btn btn-danger col-sm-3 col-xs-5 btn-margin">
+                              Delete
+                            </button>
+                        </form>
+                      </td>
+                  </tr>
+                @endforeach
+                </tbody>
+              </table>
+            </div>
+          </div>
+      </div>
+      <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+      <script src="assets/js/masomo.js"></script>
+      <link href="//fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    </body>
+</html>
